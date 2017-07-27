@@ -26,24 +26,19 @@ class CategoryWidget extends \Magento\Framework\View\Element\Template implements
         parent::__construct($context);
     }
 
-    /**
-    * Retrieve current store categories
-    *
-    * @return \Magento\Framework\Data\Tree\Node\Collection|\Magento\Catalog\Model\Resource\Category\Collection|array
-    */
     public function getCategoryCollection()
     {
         $category = $this->_categoryFactory->create();
-        
-        $rootCatID = NULL;
-        if($this->getData('parentcat') > 0)
-            $rootCatID = $this->getData('parentcat'); 
-        else
-            $rootCatID = $this->_storeManager->getStore()->getRootCategoryId();
-
-        $category->load($rootCatID);
-        $childCategories = $category->getChildrenCategories();
-        return $childCategories;
+        $collection = $category->getCollection();
+        /* @var $collection \Magento\Catalog\Model\ResourceModel\Category\Collection */
+        $collection->addAttributeToSelect('image')
+            ->addAttributeToSelect('name')
+            ->addAttributeToSelect('url_key')
+            ->addAttributeToSelect('url')
+            ->addAttributeToFilter('level', "2")
+            ->setOrder('position', \Magento\Framework\DB\Select::SQL_ASC)
+            ->joinUrlRewrite()->load();
+        return $collection;
     }
     
     /**
