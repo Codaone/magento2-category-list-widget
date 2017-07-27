@@ -33,6 +33,7 @@ class CategoryWidget extends \Magento\Framework\View\Element\Template implements
         /* @var $collection \Magento\Catalog\Model\ResourceModel\Category\Collection */
         $collection->addAttributeToSelect('image')
             ->addAttributeToSelect('name')
+            ->addAttributeToSelect('description')
             ->addAttributeToSelect('url_key')
             ->addAttributeToSelect('url')
             ->addAttributeToFilter('level', "2")
