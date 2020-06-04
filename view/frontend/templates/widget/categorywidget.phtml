@@ -9,7 +9,7 @@
 <?php foreach($categories as $category):?>
     <div class="mpamp-category <?php if ($counter == $categoriesCount - 1) echo $lastOddClass ?>" style="background: url('<?php echo $block->escapeUrl($category->getImageUrl()) ?>')">
         <a href="<?php echo $block->escapeUrl($category->getUrl()) ?>">
-            <h2 class="mpamp-category-title"><?php echo $block->escapeHtml($category->getName()) ?></h2>
+            <div class="mpamp-category-title"><?php echo $block->escapeHtml($category->getName()) ?></div>
             <?php $counter++ ?>
         </a>
     </div>
